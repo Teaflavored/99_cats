@@ -1,5 +1,10 @@
 <h1><%= @cat.name %></h1>
+
 <%= link_to "Edit the cat", edit_cat_url(@cat) %>
+
+<br>
+CAT INFO
+<br>
 
 <table>
   <tr>
@@ -20,4 +25,36 @@
   
 </table>
 
+<br>
+RENTAL REQUESTS
+<br>
+
+<table>
+  <tr>
+    <td>Rental start date</td>
+    <td>Rental end date</td>
+    <td>Status</td>
+  </tr>
+  
+  <% @requests.each do |request|%>
+  <tr>
+    <td><%= request.start_date %></td>
+    <td><%= request.end_date %></td>
+    <td><%= request.status %></td>
+    <% if request.pending? %>
+      <td><%= button_to "Approve request",
+              cat_rental_request_approve_url(request),
+              method: :get %></td>
+      <td><%= button_to "Deny request",
+              cat_rental_request_deny_url(request),
+              method: :get %></td>
+    <% end %>
+    <td><%=  button_to "Delete request",
+             cat_rental_request_url(request),
+             method: :delete %></td>
+  </tr>
+  <% end %>
+</table>
+
+<%= link_to "Make a new request", new_cat_rental_request_url %>
 <%= link_to "Back to all cats!", cats_url %>
