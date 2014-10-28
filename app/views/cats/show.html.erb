@@ -1,0 +1,23 @@
+<h1><%= @cat.name %></h1>
+<%= link_to "Edit the cat", edit_cat_url(@cat) %>
+
+<table>
+  <tr>
+    <td>Birthdate</td>
+    <td>Age</td>
+    <td>Color</td>
+    <td>Sex</td>
+    <td>Description</td>
+  </tr>
+  
+  <tr>
+    <td><%= @cat.birth_date %></td>
+    <td><%= @cat.age %></td>
+    <td><%= @cat.color %></td>
+    <td><%= @cat.sex %></td>
+    <td><%= @cat.description %></td>
+  </tr>
+  
+</table>
+
+<%= link_to "Back to all cats!", cats_url %>
