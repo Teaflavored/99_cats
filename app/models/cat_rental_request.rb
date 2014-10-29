@@ -18,6 +18,7 @@ class CatRentalRequest < ActiveRecord::Base
   validates :status, presence: true, inclusion: {in: STATUS}
   validates :start_date, presence: true
   validates :end_date, presence: true
+  
   validate :no_overlapping_approved_requests 
   validate :end_date_cannot_be_before_start_date
   
@@ -53,20 +54,20 @@ class CatRentalRequest < ActiveRecord::Base
 
   def overlapping_requests
     query = <<-SQL
-      (
-      (start_date BETWEEN '#{self.start_date}' AND '#{self.end_date}')
+      ( (start_date BETWEEN '#{self.start_date}' AND '#{self.end_date}')
     OR
       (end_date BETWEEN '#{self.start_date}' AND '#{self.end_date}')
     OR
       (start_date >= '#{self.start_date}' AND end_date <= '#{self.end_date}')
     OR
-      (start_date <= '#{self.start_date}' AND end_date >= '#{self.end_date}')
-      )
+      (start_date <= '#{self.start_date}' AND end_date >= '#{self.end_date}') )
     AND
       cat_id = '#{self.cat_id}'
     SQL
         #returns all requests that would be overlapping with our new request
-    CatRentalRequest.select('cat_rental_requests.*').where(query)
+    CatRentalRequest.select('cat_rental_requests.*')
+    .where(query)
+    .where("(:id IS NULL) OR (id != :id)", id: self.id)
   end
   
   def overlapping_approved_requests
