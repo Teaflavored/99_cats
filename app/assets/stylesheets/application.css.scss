@@ -14,3 +14,24 @@
  *= require_self
  */
 
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+legend.sex-field{
+  height:10px;
+  padding-top: 10px;
+  border-bottom:none;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: bold;
+  
+}
+
+div.table_name{
+  font-size: 30px;
+  font-weight: bold;
+}
+
+span.request{
+  float: right;
+}

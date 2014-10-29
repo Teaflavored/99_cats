@@ -1,32 +1,47 @@
 <%= flash[:errors] && flash[:errors].to_json %>
 <% action_url = @cat.persisted? ? "cats/#{@cat.id}/edit" : "/cats"%>
 
-<form action="<%= action_url %>" method="POST">
+<form action="<%= action_url %>" method="POST" role="form">
   <% if @cat.persisted? %>
     <input type="hidden" name="_method", method="PATCH">
   <% end %>
-  
+  <div class="form-group">
   <label for="cat_name">Name</label>
-  <input type="text" name="cat[name]" id="cat_name" value="<%= @cat.name %>">
-  <br>
-  
+  <input type="text" 
+        name="cat[name]" 
+        id="cat_name" 
+        value="<%= @cat.name %>"
+        class="form-control"
+        placeholder="Name">
+  <div>
+    
+   <fieldset class="sex-fieldset"> 
+   <legend class="sex-field">Sex</legend>
+        
+  <div class="radio form-control">
+ 
   <% Cat::SEX.each do |sex| %>
     <label for="cat_sex">
-      <%= sex == "M" ? "Male" : "Female"%>
-    </label>
     <input type="radio"
            name="cat[sex]"
            value="<%= sex %>"
            <%= "checked" if @cat.sex == sex %>
            id="cat_sex">
+      <%= sex == "M" ? "Male" : "Female"%>
+    </label>
   <% end %>
-  <br>
+</div>
+</fieldset>
  
   <label for="cat_color">Color</label>
-  <select name="cat[color]" id="cat_color">
+  <select name="cat[color]" id="cat_color" class="form-control">
     <option></option>
     <% Cat::COLOR.each do |color| %>
-      <option value="<%= color %>" <%= "selected" if @cat.color == color %>><%= color %></option>
+      <option 
+        value="<%= color %>" 
+        <%= "selected" if @cat.color == color %>>
+        <%= color %>
+      </option>
     <% end %>  
   </select>
   <br>
@@ -36,13 +51,16 @@
   <input type="date"
          name="cat[birth_date]"
          value="<%= @cat.birth_date %>"
-         max=<%= "#{today.year}-#{today.month}-#{today.day}" %> id="cat_birth_date" >
+         max="<%= "#{today.year}-#{today.month}-#{today.day}"%>"
+         class="form-control"
+         id="cat_birth_date" >
   <br>
   
   <label for="cat_description">Description</label>
   <textarea name="cat[description]"
-            id="cat_description"><%= @cat.description %></textarea>
+            id="cat_description"
+            class="form-control"><%= @cat.description %></textarea>
   <br>
   
-  <input type="submit" value="Create a cat">
+  <button type="submit" class="btn btn-primary btn-lg col-md-offset-4">Create the cat!</button>
 </form>

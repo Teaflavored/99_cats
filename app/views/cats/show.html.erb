@@ -1,19 +1,26 @@
 <h1><%= @cat.name %></h1>
+<form action="<%= cat_url(@cat) %> " class="button_to" method="post">
+  <div>
+    <input name="_method" type="hidden" value="delete">
+    <button type="submit" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span> Delete</button>
+    
+    <a href="<%= edit_cat_url(@cat) %>" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-wrench"></span> Edit</a>
+    
+  </div>
+</form>
+<hr>
 
-<%= link_to "Edit the cat", edit_cat_url(@cat) %>
+<div class="table_name">Cat Info</div>
 
-<br>
-CAT INFO
-<br>
 
-<table>
-  <tr>
-    <td>Birthdate</td>
-    <td>Age</td>
-    <td>Color</td>
-    <td>Sex</td>
-    <td>Description</td>
-  </tr>
+<table class="table">
+  <thead>
+    <th>Birthdate</th>
+    <th>Age</th>
+    <th>Color</th>
+    <th>Sex</th>
+    <th>Description</th>
+  </thead>
   
   <tr>
     <td><%= @cat.birth_date %></td>
@@ -25,36 +32,59 @@ CAT INFO
   
 </table>
 
-<br>
-RENTAL REQUESTS
-<br>
+<div class="table_name">Rental Requests
 
-<table>
-  <tr>
-    <td>Rental start date</td>
-    <td>Rental end date</td>
-    <td>Status</td>
-  </tr>
+<span class="request"><a href="<%= new_cat_rental_request_url %>" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-plus"></span> New rental request</a></span>
+</div>
+
+
+<table class="table">
+  <thead>
+    <th>Rental start date</th>
+    <th>Rental end date</th>
+    <th>Status</th>
+    <th>Approve</th>
+    <th>Deny</th>
+    <th>Delete</th>
+  </thead>
   
   <% @requests.each do |request|%>
   <tr>
-    <td><%= request.start_date %></td>
+    <td ><%= request.start_date %></td>
     <td><%= request.end_date %></td>
     <td><%= request.status %></td>
     <% if request.pending? %>
-      <td><%= button_to "Approve request",
-              cat_rental_request_approve_url(request),
-              method: :get %></td>
-      <td><%= button_to "Deny request",
-              cat_rental_request_deny_url(request),
-              method: :get %></td>
+      <td>
+        <a href="<%= cat_rental_request_approve_url(request) %>" 
+          class="btn btn-default btn-xs">
+          <span class="glyphicon glyphicon-ok"></span> 
+          Approve
+        </a>
+      </td>
+      <td>
+        <a href="<%= cat_rental_request_deny_url(request) %>" 
+          class="btn btn-default btn-xs">
+          <span class="glyphicon glyphicon-remove"></span> 
+          Deny
+        </a>
+        </td>
+    <% else %>
+      <td></td>
+      <td></td>
     <% end %>
-    <td><%=  button_to "Delete request",
-             cat_rental_request_url(request),
-             method: :delete %></td>
+    <td>
+
+             
+    <form action="<%= cat_rental_request_url(request) %> " class="button_to" method="post">
+      <div>
+        <input name="_method" type="hidden" value="delete">
+        <button type="submit" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-trash"></span> Delete Request</button>
+      </div>
+    </form>         
+             
+             
+    </td>
   </tr>
   <% end %>
 </table>
 
-<%= link_to "Make a new request", new_cat_rental_request_url %>
-<%= link_to "Back to all cats!", cats_url %>
