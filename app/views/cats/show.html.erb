@@ -27,6 +27,7 @@
 
 <table class="table">
   <thead>
+    <th>Owner</th>
     <th>Birthdate</th>
     <th>Age</th>
     <th>Color</th>
@@ -35,6 +36,7 @@
   </thead>
   
   <tr>
+    <td><%= @cat.user.user_name %></td>
     <td><%= @cat.birth_date %></td>
     <td><%= @cat.age %></td>
     <td><%= @cat.color %></td>
@@ -47,7 +49,7 @@
 <div class="table_name">Rental Requests
     <% if current_user.id != @cat.user_id%>
   <span class="request">
-    <a href="<%= new_cat_rental_request_url %>" 
+    <a href="<%= new_cat_cat_rental_request_url(@cat) %>" 
        class="btn btn-default btn-xs">
        <span class="glyphicon glyphicon-plus"></span>
         New rental request

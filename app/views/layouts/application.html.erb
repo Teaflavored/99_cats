@@ -18,6 +18,7 @@
     <% else %>
       <li><a href="/cats/requests_cats ">View requestable cats</a></li>
       <li><a href="<%= cats_url %>">View your cats</a></li>
+      <li><a href="<%= sessions_url %>">All signed in locations</a></li>
       <li><span>Welcome, <%= current_user.user_name %></span></li>
       <% session_found = Session.find_by(session_token: session[:session_token])%>
       <li><%= button_to "Sign Out", session_url(session_found), method: :delete, class: "remove_button_css"%></li>

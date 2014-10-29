@@ -1,27 +1,14 @@
 
 <div class="col-md-4 col-md-offset-4">
-<h1 class="text-center">Make a request!</h1>
+<h1 class="text-center">Make a request for <%= @cat.name %></h1>
 
 <%= render 'shared/error' %>
 
 
-<form action="<%= cat_rental_requests_url %>" method="POST">
-  <label for="cat_rental_request_cat_id">Cat</label>
-
+<form action="<%= cat_cat_rental_requests_url %>" method="POST">
       <input type="hidden"
              name="authenticity_token"
              value="<%= form_authenticity_token %>">
-  <select id="cat_rental_request_cat_id" 
-          name="cat_rental_request[cat_id]" 
-          class="form-control">
-    <option></option>
-    <% @cats.each do |cat| %>
-      <option 
-              value="<%= cat.id %>"
-              <%= "selected" if @cat_rental_request.cat_id == cat.id %>>
-        <%= cat.name %></option>
-    <% end %>
-  </select>
   <br>
   
   <label for="cat_rental_request_start_date">Start Date</label>

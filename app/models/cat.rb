@@ -32,6 +32,10 @@ class Cat < ActiveRecord::Base
       errors[:birth_date] << "is invalid"
     end
   end
+
+  def pending_requests
+    cat_rental_requests.where("status = ?", "PENDING")
+  end
   
   def self.all_cats_not_owned_by(user)
     Cat.all.where("user_id != ?", user.id)

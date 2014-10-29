@@ -1,9 +1,34 @@
 <h1>All logged in places</h1>
 
-<% @sessions.each do |session| %>
-<ul>
-  <li><%= session.user.user_name%></li>
-  <li><%= session.request_ip %></li>
-  <li><%= button_to "log out", session_url(session), method: :delete %></li>
-</ul>
-<% end %>
+<table class="table">
+	<thead>
+    <th>Username</th>
+    <th>Logged in IP</th>
+    <th>Logged in at?</th>
+    <th>Log out?</th>
+  </thead>
+  <% @sessions.each do |session| %>
+  <tr>
+  	<td><%= session.user.user_name%></td>
+  	<td><%= session.request_ip %></td>
+  	<td><%= session.created_at.localtime %></td>
+  	<td>
+  		<form action="<%= session_url(session) %> " 
+            class="button_to" 
+            method="post">
+            
+        <div>
+          <input name="_method" type="hidden" value="delete">
+          <input type="hidden"
+                  name="authenticity_token"
+                  value="<%= form_authenticity_token %>">
+          <button type="submit" class="btn btn-default btn-xs">
+            <span class="glyphicon glyphicon-trash"></span>
+             Log out
+          </button>
+        </div>
+      </form>
+    </td>
+  </tr>
+	<% end %>
+</table>

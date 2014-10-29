@@ -2,12 +2,13 @@ class CatRentalRequestsController < ApplicationController
   before_action :ensure_request_belongs_to_owner, only: [:approve, :deny]
   def new
     @cat_rental_request = CatRentalRequest.new
-    @cats = Cat.all
+    @cat = Cat.find(params[:cat_id])
   end
   
   def create
+    @cat = Cat.find(params[:cat_id])
     @cat_rental_request = CatRentalRequest.new(cat_rental_request_params)
-    @cats = Cat.all
+    @cat_rental_request.cat_id = @cat.id
     @cat_rental_request.user_id = current_user.id
     if @cat_rental_request.save
       redirect_to cat_url(@cat_rental_request.cat)
