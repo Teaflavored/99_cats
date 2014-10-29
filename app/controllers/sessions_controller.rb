@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
-  before_action :redirect_back_to_cats_if_signed_in, only: [:new] 
+  before_action :redirect_back_to_cats_if_signed_in, only: [:new]
+  before_action :ensure_user_signed_in, only: [:index]
 
   def new
     render :new
@@ -20,7 +21,7 @@ class SessionsController < ApplicationController
       render :new
     else
       session_token = Session.generate_session_token
-      Session.create(user_id: @user.id, session_token: session_token, request_ip: request.ip)
+      Session.create(user_id: @user.id, session_token: session_token, request_ip: request.location.country)
       session[:session_token] = session_token
       redirect_to cats_url
     end
@@ -36,4 +37,7 @@ class SessionsController < ApplicationController
     end
   end
 
+  def ensure_user_signed_in
+    redirect_to new_session_url if current_user.nil?
+  end
 end
