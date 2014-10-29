@@ -1,11 +1,14 @@
 <div class="col-md-4 col-md-offset-4">
-<h1 class="text-center">All Cats</h1>
+	<h1 class="text-center">All Cats</h1>
 
-<div class="list-group">
-  <% @cats.each do |cat| %>
-    <%= link_to cat.name, cat_url(cat), class: "list-group-item" %>
-  <% end %>
-</div>
+	<div class="list-group">
 
-<%= link_to "Create a cat!", new_cat_url, class: "btn btn-large btn-primary col-md-offset-4"%>
+	  <% @cats.each do |cat| %>
+	    <%= link_to cat.name, cat_url(cat), class: "list-group-item" %>
+	  <% end %>
+
+	</div>
+
+	<%= link_to "Create a cat!", new_cat_url, 
+			class: "btn btn-large btn-primary col-md-offset-4" %>
 </div>

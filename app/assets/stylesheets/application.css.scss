@@ -24,9 +24,13 @@ legend.sex-field{
   font-size: 14px;
   line-height: 20px;
   font-weight: bold;
-  
+  margin-bottom: 13px;
 }
 
+fieldset.sex-fieldset{
+  height:72px;
+  margin-top:-10px;
+}
 div.table_name{
   font-size: 30px;
   font-weight: bold;
@@ -45,6 +49,10 @@ table {
 }
 
 li.errors{
-  color: red;
-  
+  color: red; 
 }
+
+.form-group{
+  margin-bottom: 0px;
+}
+
