@@ -1,0 +1,9 @@
+<h1>All logged in places</h1>
+
+<% @sessions.each do |session| %>
+<ul>
+  <li><%= session.user.user_name%></li>
+  <li><%= session.request_ip %></li>
+  <li><%= button_to "log out", session_url(session), method: :delete %></li>
+</ul>
+<% end %>

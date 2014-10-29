@@ -56,3 +56,33 @@ li.errors{
   margin-bottom: 0px;
 }
 
+.navbar-inverse .navbar-nav > li > a {
+  color: white;
+}
+
+.navbar-nav > li >span {
+    float: left;
+    color: white;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.remove_button_css { 
+  outline: none;
+  padding: 5px; 
+  border: 0px; 
+  box-sizing: none; 
+  margin-top: 5px;
+  font-size: 20px;
+  color: white;
+  background-color: transparent; 
+}
+.navbar-inverse .btn-link {
+  color: white;
+  font-size: 20px;
+  margin-top: -5px;
+}
+
+.inline .list-group{
+  display:inline;
+}

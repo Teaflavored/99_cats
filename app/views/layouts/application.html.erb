@@ -7,9 +7,23 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	
+
 <nav class="navbar navbar-default navbar-inverse" role="navigation">
+  <div class="container">	
   <a class="navbar-brand" href= "<%= root_url %>">99 Cats</a>
+  
+  <ul class="nav navbar-nav navbar-right">
+    <% if current_user.nil? %>
+      <li><a href="<%= new_session_url %>">Sign in!</a></li>
+    <% else %>
+      <li><a href="/cats/requests_cats ">View requestable cats</a></li>
+      <li><a href="<%= cats_url %>">View your cats</a></li>
+      <li><span>Welcome, <%= current_user.user_name %></span></li>
+      <% session_found = Session.find_by(session_token: session[:session_token])%>
+      <li><%= button_to "Sign Out", session_url(session_found), method: :delete, class: "remove_button_css"%></li>
+    <% end %>
+  <ul>
+  </div>
 </nav>
 
 <div class="container">

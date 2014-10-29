@@ -3,21 +3,22 @@
 <form action="<%= cat_url(@cat) %> " 
       class="button_to" 
       method="post">
-
-  <div>
-    <input name="_method" type="hidden" value="delete">
-    <button type="submit" 
-            class="btn btn-default btn-xs">
-            <span class="glyphicon glyphicon-remove"></span>
-             Delete
-    </button>
+  <% if current_user.id == @cat.user_id %>
+    <div>
+      <input name="_method" type="hidden" value="delete">
+      <button type="submit" 
+              class="btn btn-default btn-xs">
+              <span class="glyphicon glyphicon-remove"></span>
+               Delete
+      </button>
     
-    <a href="<%= edit_cat_url(@cat) %>" 
-      class="btn btn-default btn-xs">
-      <span class="glyphicon glyphicon-wrench"></span> 
-      Edit
-    </a>
-  </div>
+      <a href="<%= edit_cat_url(@cat) %>" 
+        class="btn btn-default btn-xs">
+        <span class="glyphicon glyphicon-wrench"></span> 
+        Edit
+      </a>
+    </div>
+  <% end %>
 </form>
 
 <hr>
@@ -44,13 +45,14 @@
 </table>
 
 <div class="table_name">Rental Requests
+    <% if current_user.id != @cat.user_id%>
   <span class="request">
     <a href="<%= new_cat_rental_request_url %>" 
        class="btn btn-default btn-xs">
        <span class="glyphicon glyphicon-plus"></span>
         New rental request
     </a>
-  </span>
+  </span><% end %>
 </div>
 
 
@@ -59,55 +61,65 @@
     <th>Rental start date</th>
     <th>Rental end date</th>
     <th>Status</th>
-    <th>Approve</th>
-    <th>Deny</th>
-    <th>Delete</th>
+    <th>Requester</th>
+    <% if @cat.user_id == current_user.id %>
+   
+      <th>Approve</th>
+      <th>Deny</th>
+      <th>Delete</th>
+    <% end %>
   </thead>
-  
-  <% @requests.each do |request|%>
 
-  <tr>
-    <td ><%= request.start_date %></td>
-    <td><%= request.end_date %></td>
-    <td><%= request.status %></td>
+       
+    <% @requests.each do |request|%>
+    <tr>
+      <td ><%= request.start_date %></td>
+      <td><%= request.end_date %></td>
+      <td><%= request.status %></td>
+      <td><%= request.requester.user_name %>
+      <% if current_user.id == @cat.user_id%>
+      <% if request.pending? %>
 
-    <% if request.pending? %>
-
-      <td>
-        <a href="<%= cat_rental_request_approve_url(request) %>" 
-          class="btn btn-default btn-xs">
-          <span class="glyphicon glyphicon-ok"></span> 
-          Approve
-        </a>
-      </td>
-      <td>
-        <a href="<%= cat_rental_request_deny_url(request) %>" 
-          class="btn btn-default btn-xs">
-          <span class="glyphicon glyphicon-remove"></span> 
-          Deny
-        </a>
+        <td>
+          <a href="<%= cat_rental_request_approve_url(request) %>" 
+            class="btn btn-default btn-xs">
+            <span class="glyphicon glyphicon-ok"></span> 
+            Approve
+          </a>
         </td>
-    <% else %>
+        <td>
+          <a href="<%= cat_rental_request_deny_url(request) %>" 
+            class="btn btn-default btn-xs">
+            <span class="glyphicon glyphicon-remove"></span> 
+            Deny
+          </a>
+          </td>
+      <% else %>
 
-      <td></td>
-      <td></td>
+        <td></td>
+        <td></td>
+
+      <% end %>
+      <td>     
+      <form action="<%= cat_rental_request_url(request) %> " 
+            class="button_to" 
+            method="post">
+            
+        <div>
+          <input name="_method" type="hidden" value="delete">
+          <input type="hidden"
+                  name="authenticity_token"
+                  value="<%= form_authenticity_token %>">
+          <button type="submit" class="btn btn-default btn-xs">
+            <span class="glyphicon glyphicon-trash"></span>
+             Delete Request
+          </button>
+        </div>
+      </form>               
+      </td>
+    </tr>
 
     <% end %>
-    <td>     
-    <form action="<%= cat_rental_request_url(request) %> " 
-          class="button_to" 
-          method="post">
-      <div>
-        <input name="_method" type="hidden" value="delete">
-        <button type="submit" class="btn btn-default btn-xs">
-          <span class="glyphicon glyphicon-trash"></span>
-           Delete Request
-        </button>
-      </div>
-    </form>               
-    </td>
-  </tr>
-
   <% end %>
   
 </table>

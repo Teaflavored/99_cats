@@ -9,6 +9,7 @@
 #  status     :string(255)      default("PENDING"), not null
 #  created_at :datetime
 #  updated_at :datetime
+#  user_id    :integer          not null
 #
 
 class CatRentalRequest < ActiveRecord::Base
@@ -18,11 +19,18 @@ class CatRentalRequest < ActiveRecord::Base
   validates :status, presence: true, inclusion: {in: STATUS}
   validates :start_date, presence: true
   validates :end_date, presence: true
+  validates :user_id, presence: true
   
   validate :no_overlapping_approved_requests 
   validate :end_date_cannot_be_before_start_date
   
   belongs_to :cat
+  belongs_to(
+    :requester,
+    class_name: "User",
+    foreign_key: :user_id,
+    primary_key: :id
+    )
   
   def self.order_by_start_date
     order(:start_date)
