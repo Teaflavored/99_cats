@@ -1,4 +1,4 @@
-<%= flash[:errors] && flash[:errors].to_json %>
+<%= render 'shared/error.html.erb' %>
 <% action_url = @cat.persisted? ? "cats/#{@cat.id}/edit" : "/cats"%>
 
 <form action="<%= action_url %>" method="POST" role="form">
@@ -59,7 +59,8 @@
   <label for="cat_description">Description</label>
   <textarea name="cat[description]"
             id="cat_description"
-            class="form-control"><%= @cat.description %></textarea>
+            class="form-control"
+            placeholder="Enter description"><%= @cat.description %></textarea>
   <br>
   
   <button type="submit" class="btn btn-primary btn-lg col-md-offset-4">Create the cat!</button>

@@ -2,7 +2,7 @@
 <div class="col-md-4 col-md-offset-4">
 <h1 class="text-center">Make a request!</h1>
 
-<%= flash[:errors] && flash[:errors].to_json %>
+<%= render 'shared/error' %>
 
 
 <form action="<%= cat_rental_requests_url %>" method="POST">
