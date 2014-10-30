@@ -1,4 +1,4 @@
-<div class="jumbotron">
+<div class="jumbotron" style="height:500px;">
   <div class="container">
     <h1>Cats for Jimmies!</h1>
     <p>
@@ -7,5 +7,25 @@
       Rent your cats out today!
     </p>
     <p><a class="btn btn-primary btn-lg" href="<%= about_path %>" role="button">Learn more »</a></p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="col-md-4">
+    <h2>Why cats?</h2>
+    <p>Inspired</p>
+    <p><a class="btn btn-default" href="<%= about_path %>" role="button">View details »</a></p>
+  </div>
+
+  <div class="col-md-4">
+    <h2>Something smart here</h2>
+    <p><%= Faker::Hacker.say_something_smart%></p>
+    <p><a class="btn btn-default" href=href="<%= about_path %>" role="button">View details »</a></p>
+  </div>
+
+  <div class="col-md-4">
+    <h2>More smart things</h2>
+    <p><%= Faker::Hacker.say_something_smart%></p>
+    <p><a class="btn btn-default" href=href="<%= about_path %>" role="button">View details »</a></p>
   </div>
 </div>
