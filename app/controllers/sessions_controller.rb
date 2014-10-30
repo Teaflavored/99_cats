@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
       render :new
     else
       session_token = Session.generate_session_token
-      Session.create(user_id: @user.id, session_token: session_token, request_ip: Geocoder.search(request.ip).first.country)
+      Session.create(user_id: @user.id, session_token: session_token, request_ip: "hi" )
       session[:session_token] = session_token
       redirect_to cats_url
     end
