@@ -88,3 +88,25 @@ li.errors{
 .inline .list-group{
   display:inline;
 }
+
+.navbar .container .navbar-header .navbar-brand{
+  font-family: 'Arvo', serif;
+  font-size: 25px;
+  color:white;
+}
+
+
+
+.main_header {
+  margin-top:60px;
+}
+
+.jumbotron {
+  height: 500px;
+}
+.jumbotron .container {
+  margin-top:80px;
+}
+.jumbotron .container >h1{
+  font-size:100px;
+}
