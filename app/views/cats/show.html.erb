@@ -1,6 +1,6 @@
-
+<div class="jumbotron">
 <div class="container" style="margin-top:70px;">
-<h1 style="font-size:40px;">Cat: <%= @cat.name %></h1>
+<h1 style="font-size:70px;margin-top:-23px;">Cat: <%= @cat.name %></h1>
 <% if current_user.id == @cat.user_id %>
 <form action="<%= cat_url(@cat) %> " 
       class="button_to" 
@@ -123,5 +123,4 @@
   <% end %>
   
 </table>
-</h1>
-
+</div>
