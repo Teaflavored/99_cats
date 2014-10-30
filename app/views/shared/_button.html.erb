@@ -1,0 +1,17 @@
+<form action="<%= action_url %>" 
+      class="button_to" 
+      method="post">
+  <div>
+    <input name="_method" 
+           type="hidden" 
+           value="delete">
+    <input type="hidden"
+            name="authenticity_token"
+            value="<%= form_authenticity_token %>">
+            
+    <button type="submit" class="btn btn-default btn-xs">
+      <span class="glyphicon glyphicon-<%= button_glyphicon %>"></span>
+       <%= button_msg %>
+    </button>
+  </div>
+</form>

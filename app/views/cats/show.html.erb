@@ -3,11 +3,8 @@
 <form action="<%= cat_url(@cat) %> " 
       class="button_to" 
       method="post">
-
-    <div>
-      <input name="_method" type="hidden" value="delete">
+  <input name="_method" type="hidden" value="delete">
       
-      <input name="_method" type="hidden" value="delete">
       <input type="hidden"
               name="authenticity_token"
               value="<%= form_authenticity_token %>">
@@ -23,7 +20,6 @@
         <span class="glyphicon glyphicon-wrench"></span> 
         Edit
       </a>
-    </div>
 </form>
 <% end %>
 
@@ -108,22 +104,16 @@
         <td></td>
 
       <% end %>
-      <td>     
-      <form action="<%= cat_rental_request_url(request) %> " 
-            class="button_to" 
-            method="post">
-            
-        <div>
-          <input name="_method" type="hidden" value="delete">
-          <input type="hidden"
-                  name="authenticity_token"
-                  value="<%= form_authenticity_token %>">
-          <button type="submit" class="btn btn-default btn-xs">
-            <span class="glyphicon glyphicon-trash"></span>
-             Delete Request
-          </button>
-        </div>
-      </form>               
+      <td>
+        
+      <% action_url = cat_rental_request_url(request) %>
+      <% button_glyphicon = "trash"%>
+      <% button_msg = "Delete Request" %>
+      <%= render "shared/button", 
+                  action_url: action_url, 
+                  button_glyphicon: button_glyphicon, 
+                  button_msg: button_msg %>
+                      
       </td>
     </tr>
 
