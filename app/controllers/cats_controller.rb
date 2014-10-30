@@ -67,6 +67,8 @@ class CatsController < ApplicationController
   end
   
   def assure_cat_is_yours
-    redirect_to cats_url unless current_user.id == params[:id]
+    if current_user.id != Cat.find(params[:id]).user_id
+      redirect_to cats_url
+    end
   end
 end
